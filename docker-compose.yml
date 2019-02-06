@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 13306:3306
+    volumes:
+      - ../rental-reserve/mysql-datavolume:/var/lib/mysql
+  admin_server:
+    environment:
+      - MYSQL_HOST=db
+    build: .
+    command: >
+      bash -c "
+        bundle install --quiet &&
+        docker/bin/start rails
+      "
+    volumes:
+      - .:/tgt
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  mysql-datavolume:

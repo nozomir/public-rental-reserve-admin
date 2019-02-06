@@ -1,0 +1,182 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'lib/templates/**/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+
+# ENable after release of Ruby 3
+
+Documentation:
+  # Skips checking to make sure top level modules / classes have a comment.
+  Enabled: false
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+  IndentOneStep: true
+
+Layout/EndAlignment:
+  # The value `keyword` means that `end` should be aligned with the matching
+  # keyword (`if`, `while`, etc.).
+  # The value `variable` means that in assignments, `end` should be aligned
+  # with the start of the variable on the left hand side of `=`. In all other
+  # situations, `end` should still be aligned with the keyword.
+  # The value `start_of_line` means that `end` should be aligned with the start
+  # of the line which the matching keyword appears on.
+  EnforcedStyleAlignWith: variable
+  AutoCorrect: true
+
+# ({ と hash を開始した場合に ( の位置にインデントさせる
+# そもそも {} が必要ない可能性が高いが Style/BracesAroundHashParameters はチェックしないことにしたので
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/EmptyWhen:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 65
+
+Metrics/BlockLength:
+  Exclude:
+    - 'db/fixtures/*'
+    - 'db/schema.rb'
+    - 'spec/acceptance/**/**/*'
+    - 'spec/models/**/*'
+    - 'spec/requests/**/*'
+    - 'spec/controllers/**/*'
+
+Metrics/MethodLength:
+  Max: 150
+
+Metrics/ModuleLength:
+  Max: 400
+
+Metrics/ParameterLists:
+  Max: 10
+
+Naming/PredicateName:
+  Exclude:
+    - 'app/graphql/**/*'
+
+Naming/UncommunicativeBlockParamName:
+  Exclude:
+    - 'app/graphql/**/*'
+
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  ()
+    '%i': ()
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': ()
+    '%W': ()
+    '%x': ()
+
+Rails:
+  Enabled: true
+
+# due to a bug encountered, try reenable later
+Rails/Blank:
+  Enabled: false
+
+Rails/Output:
+  Exclude:
+    - 'db/seeds/**/*'
+    - 'db/examples/**/*'
+
+Security/Open:
+  Exclude:
+    - 'db/seeds/**/*'
+    - 'db/examples/**/*'
+
+Style/ArrayJoin:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+  # EnforcedStyle: context_dependent
+
+Style/ClassAndModuleChildren:
+  # Skips checking the style of children definitions at classes and modules.
+  #
+  # Basically there are two different styles:
+  #
+  # `nested` - have each child on a separate line
+  #   class Foo
+  #     class Bar
+  #     end
+  #   end
+  #
+  # `compact` - combine definitions as much as possible
+  #   class Foo::Bar
+  #   end
+  #
+  # With it disabled, either or is valid.
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/MethodDefParentheses:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: true
+  EnforcedStyle: only_raise
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+VariableName:
+  EnforcedStyle: snake_case
+  Exclude:
+    - 'app/graphql/**/*'
