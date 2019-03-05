@@ -5,13 +5,16 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
     ports:
       - 13306:3306
     volumes:
       - ../rental-reserve/mysql-datavolume:/var/lib/mysql
+      - ./docker/mysql/conf:/etc/mysql/conf.d:rw
   admin_server:
     environment:
       - MYSQL_HOST=db
+      - TZ=Japan
     build: .
     command: >
       bash -c "

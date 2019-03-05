@@ -28,4 +28,7 @@
 #
 
 class Book < ApplicationRecord
+  enum reserve_type: { kitchen: 0, mtg_big: 1, ordinal: 2, mtg_middle: 3 }
+  enum status: { accepted: 0, completed: 1, canceled: 2 }
+  enum paid: { paid: 0, not_paid: 1 }
 end
